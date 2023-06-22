@@ -5,7 +5,7 @@
 }
 
 .question > .progressbar-active {    
-    animation:  bar-animation 20s linear; 
+    animation:  bar-animation 30s linear; 
 }
 @keyframes bar-animation  {
  0% {
@@ -28,4 +28,30 @@
     width: 100%;
     background: orangered;
  }
+}
+
+.option { 
+    --tw-bg-opacity: 1;
+    background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+    display: flex;
+    padding : 0.5rem;
+    margin-top: 1.25rem;
+    border-radius: 0.5rem;
+    width: 16rem;
+    cursor: pointer;
+
+}
+.option:hover {  
+   --tw-bg-opacity: 1;
+    background: rgb(109 40 217 / var(--tw-bg-opacity));
+    color: #fff;
+     --tw-scale-x: 1.05;
+    --tw-scale-y: 1.05;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    transition-duration: 200ms;
+}
+.active {  
+   --tw-bg-opacity: 1;
+    background: rgb(109 40 217 / var(--tw-bg-opacity));
+    color: #fff;
 }
