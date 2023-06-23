@@ -12,9 +12,7 @@ export const Question = ({
   const progressBar = useRef(null);
 
   const goToNextQuestion = () => {
-    if (timer.current) {
-      clearTimeout(timer.current);
-    }
+    clearTimeout(timer.current);
     flushSync(() => {
       setAnswer(selectedOption);
     });
@@ -23,10 +21,11 @@ export const Question = ({
 
   useEffect(() => {
     progressBar.current.classList.remove("progressbar-active");
+    clearTimeout(timer.current);
     setTimeout(() => {
       progressBar.current.classList.add("progressbar-active");
     }, 0);
-    timer.current = setTimeout(goToNextQuestion, 30 * 1000);
+    timer.current = setTimeout(goToNextQuestion, 10 * 1000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [question]);
 
@@ -66,7 +65,7 @@ export const Question = ({
             className="flex bg-gray-800 rounded-lg pl-2 pr-2 pt-1 pb-1 mt-5 items-center justify-center text-white text-md hover:scale-105 duration-200"
             onClick={goToNextQuestion}
           >
-            {currentQuestion === totalQuestions ? "Submit" : "Next"}
+            {currentQuestion === totalQuestions - 1 ? "Submit" : "Next"}
           </button>
         </div>
       </div>

@@ -3,7 +3,8 @@ import QuestionList from "../../Json/Questions.json";
 import { QuizResult } from "../QuizResult/QuizResult";
 import { Question } from "../Question/Question";
 import "../QuizScreen/QuizScreen.css"
-export const QuizScreen = ({ retry }) => {
+
+export const QuizScreen = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [markedAnswer, setMarkedAnswer] = useState(
     new Array(QuestionList.length)
@@ -28,6 +29,8 @@ export const QuizScreen = ({ retry }) => {
       correct: correct,
       percentage: Math.trunc((correct / QuestionList.length) * 100),
       feedback: wrongresponse,
+      questions: QuestionList,
+      markedanswer: markedAnswer,
     };
   };
   const isQuestionEnd = currentQuestionIndex === QuestionList.length;
@@ -36,7 +39,7 @@ export const QuizScreen = ({ retry }) => {
       <div className="quiz-screen">
         {console.log(currentQuestionIndex)}
         {isQuestionEnd ? (
-          <QuizResult result={calculateResult()} retry={() => retry} />
+          <QuizResult result={calculateResult()} />
         ) : (
           <Question
             question={QuestionList[currentQuestionIndex]}
@@ -48,7 +51,7 @@ export const QuizScreen = ({ retry }) => {
                 newarr[currentQuestionIndex] = index;
                 return newarr;
               });
-              setCurrentQuestionIndex(currentQuestionIndex + 1);
+              setCurrentQuestionIndex((prev) => prev + 1);
             }}
           />
         )}

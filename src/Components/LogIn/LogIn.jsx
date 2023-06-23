@@ -1,19 +1,28 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import { Button, Card, CardContent } from "@mui/material";
+import { Button, Card, CardContent, Grid } from "@mui/material";
 import { Dashboard } from "../DashBoard/Dashboard";
 import { useNavigate } from "react-router-dom";
-
-export const SignUp = ({ start }) => {
+export const LogIn = ({ start }) => {
   const [username, setUsername] = useState("");
   const [age, setAge] = useState(null);
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   return (
     <Dashboard>
-      <Card sx={{ width: 400, justifyContent: "center", alignItems: "center" }}>
+      <Card
+        sx={{
+          width: {
+            xs: 300,
+            sm: 400,
+            md: 500,
+            lg: 800,
+            xl: 900,
+          },
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <CardContent>
           <Box
             sx={{
@@ -26,27 +35,16 @@ export const SignUp = ({ start }) => {
             <form>
               <TextField
                 id="outlined-basic"
-                label="Name"
-                variant="outlined"
-                onChange={(event) => setName(event.target.value)}
-              />
-              <TextField
-                id="outlined-basic"
-                label="Age"
-                variant="outlined"
-                onChange={(event) => setAge(event.target.value)}
-              />
-              <TextField
-                id="outlined-basic"
                 label="Username"
                 variant="outlined"
                 onChange={(event) => setUsername(event.target.value)}
               />
               <TextField
-                id="outlined-password-input"
-                label="Password"
+                id="outlined-basic"
                 type="password"
-                autoComplete="current-password"
+                label="Password"
+                variant="outlined"
+                onChange={(event) => setAge(event.target.value)}
               />
               <Button
                 type="submit"
@@ -56,12 +54,21 @@ export const SignUp = ({ start }) => {
                 onClick={() => {
                   localStorage.setItem("username", username);
                   localStorage.setItem("age", age);
-                  navigate("/");
+                  navigate("/topics");
                 }}
               >
                 Log In
               </Button>
             </form>
+            <div>
+              <p>Don't have an account ? </p>
+              <button
+                className="cursor-pointer text-blue-400"
+                onClick={() => navigate("/signup")}
+              >
+                Sign Up
+              </button>
+            </div>
           </Box>
         </CardContent>
       </Card>

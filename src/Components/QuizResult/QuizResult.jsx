@@ -1,10 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCollapse } from "react-collapsed";
-
-export const QuizResult = ({ result, retry }) => {
+import { useNavigate } from "react-router-dom";
+import Modal from "@mui/material/Modal";
+import { Box } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
+export const QuizResult = ({ result }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: {
+      xs: 300,
+      sm: 500,
+      md: 700,
+      lg: 900,
+      xl: 1200,
+    },
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    borderRadius: 5,
+    p: 4,
+  };
   return (
     <>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          {result.questions.map((ques, index) => (
+            <li className="list-none m-1" key={index}>
+              <div className="p-2 flex flex-row justify-between items-center gap-2 border-2 border-slate-200">
+                <div className="">
+                  <div className="flex flex-row gap-2">
+                    <span>Q:</span>
+                    <p>{ques.title}</p>
+                  </div>
+                  <div className="flex flex-row gap-2">
+                    <span>Ans:</span>
+                    <p>{ques.options[ques.correctoptionindex]}</p>
+                  </div>
+                </div>
+                <div>
+                  {result.markedanswer[index] === ques.correctoptionindex ? (
+                    <CheckIcon />
+                  ) : (
+                    <CloseIcon />
+                  )}
+                </div>
+              </div>
+            </li>
+          ))}
+        </Box>
+      </Modal>
       <div className="quiz-result grid justify-center items-center place-content-center">
         <div className="m-10 flex flex-col gap-5 justify-center items-center">
           {result.correct === 0 ? (
@@ -37,13 +95,13 @@ export const QuizResult = ({ result, retry }) => {
           <div className="flex flex-row gap-5">
             <button
               className="bg-gray-800 pl-2 pr-2 pt-1 pb-1 rounded-lg text-white hover:scale-105 duration-200"
-              onCLick={retry}
+              onClick={() => navigate("/topics")}
             >
               Retry
             </button>
             <button
               className="bg-teal-400 pl-2 pr-2 pt-1 pb-1 rounded-lg text-white hover:scale-105 duration-200"
-              onCLick={retry}
+              onClick={handleOpen}
             >
               View Answers
             </button>

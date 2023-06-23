@@ -1,7 +1,7 @@
 .quiz-container { 
      position: relative !important;
      z-index: 0;
-     margin: 50px auto 50px auto;
+     margin: 50px auto 40px auto;
      width: 95%;
      max-width: 650px;
      min-height: 350px;

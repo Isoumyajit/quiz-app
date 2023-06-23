@@ -1,11 +1,10 @@
 .question > .progress-bar { 
     width: 0%;
     height: 5px;
-    background: #000;
 }
 
 .question > .progressbar-active {    
-    animation:  bar-animation 30s linear; 
+    animation:  bar-animation 10s linear; 
 }
 @keyframes bar-animation  {
  0% {
